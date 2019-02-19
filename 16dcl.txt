@@ -1,0 +1,26 @@
+#data control language--->dcl
+#it is used to control user access in a database and related to the security issues.means the person who see,modify,access the db is only can do this.ex:username,
+password.
+#it allows to restricts the user from accessing data in db.
+#commands
+	*grant(means grant the permision)
+	*revoke(means release the permision.ex:quit the organization.updating the control access)
+grant:it gives user access previleges to the db.
+syntex:grant <previlege list> on <relation name or user name> to <user/role list>
+ex:grant all on employee to abc;[with grant option]
+all means whole db(see,modify,access) in employee table abc means that user.
+ex:
+>grant create session to username;(grand the session creating priviliges)
+>grant create table to username
+>grant sysdba to username;(sysdba is set of privilliges which has all the permissions)
+>grant create any table to username;
+>grant drop any table to username;
+
+
+
+revoke 
+#it is used to cancel previously granted or derived permisions.use the revoke command the granted will be released and released will be granted.
+systex:revoke <previlege list> on <relation name or view name> from <username>
+ex:revoke update on employee from abc;
+ex:
+revoke create table from username;

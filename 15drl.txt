@@ -1,0 +1,24 @@
+#select is comming under the data retrieval language(drl).drl only have select statement.it use to read the data from the table.
+#select clause specifies the columns to search.
+#from clause specifies the data source.
+#column search can be modified using expressions.
+#if a table have 2 column fname,lname then you want to print it in same column then we use select statement.ex:
+>select fname || ' ' || lname from student;
+#in this || means concodination which is used to join two column
+#but at the printed values the name of the column is like 'fname||' '||lname' if we does not want it then
+>select fname || ' ' || lname as fullname from student;
+#if you have mothly salary column and you want the annual salary then also you can by select.
+>select salary*12 from employee;
+#but at the printed values the name of the column is like 'salary*12' if we does not want it then
+>select salary*12 as annual_salary from employee;
+#this as is called alias.we can give space in alias only if that alias name in quates ex:as 'full name'.in alias the as key word is optional it is used for readability
+of the programmer.
+
+>select * from student.
+#use the previous statement to print all columns in the table.
+#if you want only some particular column then
+>select rollno,name from student;
+#there is no restriction for the order.
+
+>select distinct deptid from employee;
+#if we do like this then the duplication values does no apper.ex:deptid have 1,1,2,3,4,3,4,3,2,2 then we use this query then the o/p:1,2,3,4.

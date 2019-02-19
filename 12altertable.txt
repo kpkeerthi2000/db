@@ -1,0 +1,38 @@
+alter table is used for
+*adding column
+*modifying column
+*dropping column
+*renaming column
+
+adding column
+>alter table employee add name varchar(20);
+the new column always added the last 
+you can also add many column at a single alter command
+>alter table employee add(sno number(3),age number(2),city varchar(10));
+
+modify is used to modify the data type of the column.
+if you modify a column then make sure that the changes is compatiable with the data as well.ex:if a column have varchar(20) data type and also it have some values then
+you cannot modify it into numeric type.because such strings cannot convered into numbers.but you can modify it in to varchar(10).but in this case if that column
+have value which have more then 10 characters then it will show error.
+
+drop column
+>alter table student drop column salary;
+if you this all the feild are dropped and the memory of the table released.when you use big server then you drop a column then a big amount of date will delete,and
+column will delete and then table will be modify so it take more to delelte so at that time we use set and unuse option like,
+>alter table student set unused column salary;
+>alter table student set unused (rollno,name);
+in this in logically that column is not in the table but the memory is not released.if you want to drop all unuse column then,
+>alter table student drop unused columns;
+drop table
+>drop table student;
+in this case the data and also the structure of the table will be dropped.
+
+truncate is also under the DDL command.so it cannot to rollback.
+
+
+>raname old_name to new_name;
+	or
+>alter table old_name rename to new_name;
+this is used to rename the table.
+>alter table student rename column sno to stdno;
+this used to change the column name sno to stdno in student table.

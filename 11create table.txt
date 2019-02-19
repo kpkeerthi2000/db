@@ -1,0 +1,116 @@
+in terminal enter mysql -u root -p and type the password.if you type 'show databases;' then it shows the types of database you have.if you type 'create database new'
+then a new database will be created and named new.if you type 'use mysql;' then the server points to the mysql database.in cmd prompt type sqlplus then it will show
+the version of the oracle and it ask the username:(system).and password:(k.muthu).and type connect and type your own username and password.if you type disc to
+disconnect from the oracle database.and to reconnect to the oracle type conn sys as sysdba and it ask for password(k.muthu).if you want to see the current user the
+type show user.
+
+
+tip:>/ 
+then it execute the previous query.
+
+placeholder:like scanf
+
+
+
+DDL
+1)create
+2)Alter
+3)Drop
+4)truncate--it remove all the data from the table but not remove the structure of the table.it change the metadata.it used to release the memory
+5)Rename
+(roll back)
+all these ddl statement are auto committed.means if you execute these commands it will be commited we will not be able to roll it back.ex:if you drop a table then 
+you cannot retriew the table back.
+
+we can classify the sql db in two parts data dictionay and user table.data dictionary used to stores the meta data.means it store more info about the oracle.it is 
+system's table.the table must be valid no space no special character and number for starting letter of the table name and it should not be any keyword.
+you must have a create table permission and storage area.table will be created in user's schema.DEFAULT keyword is used to set default value for the column.
+we can also use normal cmd prompt and also Run sql command line prompt.
+
+
+#every column value is null as default
+
+#desc tablename means describe the table.
+data type(see note diagram)
+character data type classification
+*char data type(fixed string size)
+*varchar2 data type(variable string size)
+*varchar data type
+*nchar (native fixed string size)
+*nvarchar2 (native variable string size)
+*long and long raw
+
+
+char 
+this data type stores the string value and the size of the string is fixed at the time of declairing the variable.ex:grand char;manager char(10):='guru99';in first
+statement the size is 1 byte(default value).the second declaration max size will be 10 and the 'guru99' is 6 byte.oracle will allocate the memory of 10 bytes rather
+then 6 bytes in this case.the size restriction for this data type is 1-2000 bytes.oracle would be blank-padded the variable if the variable didn't occupy the entire
+size that has been declaird size even if the variable didn't occupy it fully.
+
+
+varchar2
+this data type stores the string,but the length of the string is not fixed.ex:manage varchar2(10):='guru99'.manage of varchar2 data type with the maxium size of 10 
+and assigned the value 'guru99' which is of 6 bytes.oracle will allocate memory of only 6 bytes in the case.the size restriction for this data type is 1-4000 byte 
+for table column size and 1-32767 bytes for variables.the size is defined for each variable at the time of variable declaration.but oracle will allocate memory only
+after the variable is defined.i.e., oracle will consider only the acatual length of the string that has been given for a variable in the declaration part.It is 
+always good to use varchar2 instead of char data type to optimize the memory usage.
+
+
+varchar
+it is synonymous with the varchar2 data type.ex:manager varchar(10):='guru99'.the above declaration statement declared the variable 'manager' of varchar data type
+with the maximum size of 10 and assigned the value 'guru99' which is of 6 bytes.oracle will allocate memory of only 6 bytes in this case(similar to varchar2).it is
+always a good practice to use varchar2 instead of varchar to avoid behavioural changes.
+
+different between varchar and varchar2:
+in varchar there is a different between NULL and empty string.but in varchar2 there is no different between NULL and empty string.currently varchar behaves exactly 
+the same as varchar2.However this type should not be used as it is reserved for future usage.
+
+different among nchar,nvarchar and other
+*nchar and nvarchar can store unicode characters.(unicode is the international standard set of character in various languages.now it have nearly 1,00,000 character)
+*char and varchar cannot store unicode characters.
+*char and nchar are fixed length which will reserve storage space for number of characters you specify even if you don't use up all that space.
+*varchar and nvarchar are variable-length which will olny use up spaces for the characters you store.it will not reserve storage like char or nchar.
+*nchar and nvarchar will take up twice as much storage space,so it may be wise to use them only if you need unicode support.
+
+nchar
+this is same as char data type but the character set will of the national character set.ex:native nchar(10);the above declaration statement declaires the variable
+native of nchar data type with the maximum size of 10.the length of this variable depends upon the(number of lengths) per byte as defined in the character set.this 
+charcter set can be define for the session using NLS_PARAMETERS.the character set can be either UTF16 or UTF8.the size restriction is 1-2000 byte.
+
+nvarchar2
+this data type is same as varchar2 data type but the character set will of the national character set.ex:native nvarchar2(10):='rajesh'; the above declaration the 
+variable with the maximum size of 10.this character set can be defined for the set session using NLS_PARAMETERS.the character set can be UTF8 or UTF16.the size 
+restriction is 1-4000 bytes.
+
+long and longraw
+this data type used to store large text or raw data up to maximum size of 2GB.ex:Large_text LONG;large_raw LONG RAW;it is not recommented for oracle.instead of this
+use LOB.this is mainly used for data dictionary.LONG data type is used to store character set data,while LONG RAW is used for store binary formate.LONG RAW data type
+accecpts media object,images,ect.,but LONG works only on data that can be stored using character set.
+
+number data type
+this data type stores fixed or floating point numbers up to 38 digits of precision.the variable can be declared either with precision and decimal details or without
+this information.ex:a number(8,2) this mean a allow 8 digit precision and 2 decimal digits.so that 2 decimal and 6 for integer number.ex:b number(8) it allows 8 
+precision and no decimal digits.ex:c number() in this no restriction of no of digit precision.so it allows maximim of 38 digits.
+
+BOOLEAN data type
+the value of this data type does not need enclose of quotes.ex:var BOOLEAN;
+
+DATE data type
+this data type stores the values in date format,as date,month,and year.Whenever a variable is defined with DATE data type along with the date it can hold time 
+information and by default time information is set to 12:00:00 if not specified.values need to enclose within quotes while assigning for this data type.the standard
+Oracle date formate for input and output is 'DD-MMM-YYYY' and it again set at NLS_PARAMETERS(NLS_DATE_FORMATE) at the session level.ex:d DATE:='01-JAN-2018';da 
+DATE:= SYSDATE;although these both variable holds the time information.
+
+LOB data type
+this data type mainly used to store and manipulate large blocks of unstructured data's like images,multimedia files,etc.,It is more flexible then the LONG data type.
+advantages of LOB:
+*the number of column in a table with LONG data type is limited to 1, whereas a table has no restriction on a number of columns with LOB data type.
+*the data interface tool accepts LOB data type of a table during data replication,but it omits LONG column of the table.these LONG column need to be replicate 
+manualy.
+*LOB can store up to 128TB.
+*Oracle is constantly improved the LOB data type in each of these releases according to the modern requirement,whereas LONG data type is constant and not getting many
+updates.
+different type of LOB
+*BLOB(4GB)
+*CLOB(4GB) and NCLOB(4GB)
+*BFILE(maximum 4GB)

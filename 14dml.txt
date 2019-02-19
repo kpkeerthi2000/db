@@ -1,0 +1,85 @@
+dml-->data maniplulation language.
+add,remove,modify the data inside the table are under dml.
+#you can add a new row or tuple or record.---->add
+#modify existing rows in a table---->update
+#remove existing rows from a table---->delete
+#multiple dml statements performing a logical task is called transaction.
+#use commit command to save the changes
+#use rollback command to undo the changes.
+
+commands
+*insert
+*update
+*delete
+*merge(it is combination of insert and update statements)
+
+insert
+#while inserting the sequence of the values must be same as that sequence of that column. and the data type must be same as you define when you create table.ex:
+>inser into sample values(2,'rajesh');
+		or
+>insert into sample values(&id,'&name');          ----->' ' for varchar.
+Enter value for id:(we can write what we want)
+Enter value for name: (we can write what we want)
+#if we want to insert values for some particular values then,
+>insert into sample(age,sname,sno) values(19,'rajesh',2);      #order is not a problem.we can put it we want.but if any primary or not null column must be insert.
+#in this the order is same as we mention it in that statement.all the other values of the columns will be default or if we mention that default then that default 
+values will set to the other column value.
+
+>column sname format a5;
+#if we do like this then the values after 5 th character put into the new line.in this a means alpha numeric type.it is only for character type.
+
+
+update
+while updtating a particular record you have to specify the particular condition and any record which is saticifying that condition will only updated.
+>update student set dept='cse' where rollno=1;
+>update student set dept='ece';         #we can do like this.for all column updates
+>update student set dept='cse',name='rajesh' where rollno=1;
+in this set is important.
+
+
+delete
+while deleting if we does not give any condition using where class then all data will be deleted.
+in delete statement if we does not write from it will define and the same text will be working correctly.
+>delete from student where rollno=1;
+if we do like this then rollno=1 of the column will deleted.
+we use roll back to get the prevent of that delete statement.
+
+
+merge
+merge statement is used to do the conditional insert or update in a particular table.
+>merge into copy_emp c using employee e on (e.empid=c.empid) when matched then update set c.firstname=e.firstname,c.lastname=e.lastname when not matched then insert values(e.empid,e.firstname,e.lastname);
+#if we do like this then if the empid of employee is matched to the empid of copy_emp table then the values in employee tables will copied to the copy_emp table.
+if not then the old value(or we will insert any value) will save to it.
+
+
+
+managing transaction
+#ddl and dcl commands are auto committed.
+#dml commands need to be managed
+#transaction begins with first dml command
+#transaction ends when,
+	*commit or rollback is issued.
+	*ddl or dcl command issued.(when you write ddl or dcl will commit all the uncommitted dmls as well.)
+	*command editor exits.(if you exit from the editor in proper manner like desc means disconnect then the dml statement will commit automatically without 
+using commit statement.if we does not exit properly like close the editor for example click cross buttton then it will not commit automatically.it is call system
+crash.)
+	*system crashes
+#savepoint can be placed in the trasaction as a marker for rollback.if we type 5 dml statement then we want to rollback only last 3 dml statement then we can use
+savepoint keyword.but also we use the savepoint the dml statement does not commit until you write commit statement or proper exit of the editor.
+
+
+tip:>rollback;
+it is like and opposite to commit statement.
+example we create table student with columns rollno name then
+>insert into student values(1,'rajesh');
+>savepoint raj;
+>insert into student values(2,'sara');
+>savepoint sara;
+>insert into student values(3,'mani');
+#after this if we print, all rows will be print.if
+>rollback to sara;
+#then if you print,mani is not printed because it rolled back.if
+>rollback to raj;
+#then if you print,sara is not printed because it rolled back.if
+>rollback.
+#then nothing will be print.because all of then is rolled back.
